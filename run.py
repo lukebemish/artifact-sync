@@ -3,7 +3,7 @@ import re
 import requests
 from requests.auth import HTTPBasicAuth
 
-allowedVersion = re.compile("^"+os.environ['ALLOWED_VERSION'].replace('*','[.0-9a-zA-Z-_]*'+"/"))
+allowedVersion = re.compile("^"+os.environ['ALLOWED_VERSION'].replace('*','[.0-9a-zA-Z-_]*')+"/")
 allowedPaths = [re.compile("^"+i.replace('*','[.0-9a-zA-Z-_]*')+"/") for i in os.environ['ALLOWED_PATHS'].split(',')]
 mavenURL = os.environ['MAVEN_URL']
 mavenUser = os.environ['MAVEN_USER']
