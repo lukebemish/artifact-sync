@@ -3,8 +3,8 @@ import re
 import requests
 from requests.auth import HTTPBasicAuth
 
-allowedVersion = os.environ['ALLOWED_VERSION']
-allowedPaths = [re.compile("^"+i.replace('*','[^/]*')+"/") for i in os.environ['ALLOWED_PATHS'].split(',')]
+allowedVersion = re.compile("^"+os.environ['ALLOWED_VERSION'].replace('*','[.0-9a-zA-Z-_]*'+"/"))
+allowedPaths = [re.compile("^"+i.replace('*','[.0-9a-zA-Z-_]*')+"/") for i in os.environ['ALLOWED_PATHS'].split(',')]
 mavenURL = os.environ['MAVEN_URL']
 mavenUser = os.environ['MAVEN_USER']
 mavenPass = os.environ['MAVEN_PASSWORD']
@@ -22,7 +22,7 @@ for path, subdirs, files in os.walk(root):
             if pattern.match(outpath):
                 start = pattern.search(outpath).group(0)
                 remaining = outpath[len(start):]
-                if remaining.startswith(allowedVersion):
+                if allowedVersion.match(remaining):
                     with open(os.path.join(path, name), 'rb') as f:
                         print(mavenURL + outpath)
                         headers = {
