@@ -18,6 +18,7 @@ print("Uploading files from "+root)
 for path, subdirs, files in os.walk(root):
     for name in files:
         outpath = os.path.relpath(os.path.join(path, name), root)
+        print("Found file at "+outpath)
         for pattern in allowedPaths:
             if pattern.match(outpath):
                 start = pattern.search(outpath).group(0)
@@ -31,4 +32,4 @@ for path, subdirs, files in os.walk(root):
                         put = requests.put(mavenURL + outpath, auth=basic, data=f, headers=headers)
                         if put.status_code < 200 or put.status_code >= 300:
                             raise Exception("Failed to upload file: " + mavenURL + outpath + "; received status code " + str(put.status_code))
-
+                    break
