@@ -13,11 +13,7 @@ basic = HTTPBasicAuth(mavenUser, mavenPass)
 
 root = os.path.join(os.getcwd(), "repo")
 
-paths = set()
-
-fullpaths = {}
-
-metadatas = {}
+print("Uploading files from "+root)
 
 for path, subdirs, files in os.walk(root):
     for name in files:
