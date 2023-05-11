@@ -1,0 +1,14 @@
+*.py          text    eol=lf  diff=java
+
+.editorconfig   text    eol=lf
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.jar           binary
+*.jks           binary
+*.png           binary
+*.so            binary
+*.war           binary
