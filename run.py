@@ -18,7 +18,6 @@ print("Uploading files from "+root)
 for path, subdirs, files in os.walk(root):
     for name in files:
         outpath = os.path.relpath(os.path.join(path, name), root)
-        print("Found file at "+outpath)
         for pattern in allowedPaths:
             if pattern.match(outpath):
                 start = pattern.search(outpath).group(0)
